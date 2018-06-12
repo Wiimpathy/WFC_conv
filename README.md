@@ -11,12 +11,15 @@ You may consult the log file 'log_cachecreate.txt' for any errors during the cac
 wfc_conv.exe Path [-OPTION]
 
 #Path#
-  The path to the WiiFlow folder containing your boxcovers.
+
+The path to the WiiFlow folder containing your boxcovers.
 
 
 #OPTION#
-  -uncompress : Don't compress textures. Not recommended, files are large. It's disabled by default in WiiFlow. 
-  -wiicovers  : Create cache files for Wii and GameCube covers.
+
+-uncompress : Don't compress textures. Not recommended, files are large. It's disabled by default in WiiFlow.
+  
+-wiicovers  : Create cache files for Wii and GameCube covers.
 
 
 Examples :
