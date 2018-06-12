@@ -22,6 +22,7 @@ wfc_conv.exe Path [-OPTION]
 Examples :
 
   wfc_conv.exe e:\WiiFlow
+  
   wfc_conv.exe e:\WiiFlow -wiicovers
 
 
