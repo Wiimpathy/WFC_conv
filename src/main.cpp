@@ -93,8 +93,8 @@ void CreateCache(const char *folder, bool compress, bool skip)
 	int i = 0, count = 0;
 	u8 textureFmt = compress ? GX_TF_CMPR : GX_TF_RGB565;
 
-    DIR *dir;
-    struct dirent *entry;
+	DIR *dir;
+	struct dirent *entry;
 
 	if (!(dir = opendir(folder)))
 	{
@@ -106,17 +106,17 @@ void CreateCache(const char *folder, bool compress, bool skip)
 	if (chdir(folder) == -1)
 		printf("\nCan't access %s \n", folder);
 
-    while((entry = readdir(dir)) != NULL) {
+	while((entry = readdir(dir)) != NULL) {
 		char currentpath[MAXPATHLEN];
 
-    	struct stat statbuf;
-        stat(entry->d_name,&statbuf);
+		struct stat statbuf;
+		stat(entry->d_name,&statbuf);
 		
-        if(S_ISDIR(statbuf.st_mode)) // Folder : Open recursively
+		if(S_ISDIR(statbuf.st_mode)) // Folder : Open recursively
 		{
 			snprintf(currentpath, sizeof(currentpath), "%s%c%s", folder, separator, entry->d_name);
 
-            // Skip parent and current directory
+			// Skip parent and current directory
 			if (strcmp(entry->d_name, ".") == 0 || strcmp(entry->d_name, "..") == 0)
 				continue;
 
@@ -135,9 +135,9 @@ void CreateCache(const char *folder, bool compress, bool skip)
 #endif
 			free(cachepath);
 
-            CreateCache(entry->d_name, compress, skip);
-        }
-        else  // Files : create cache files.
+			CreateCache(entry->d_name, compress, skip);
+		}
+		else  // Files : create cache files.
 		{
 			snprintf(currentpath, sizeof(currentpath), "%s",  entry->d_name);
 
@@ -216,12 +216,13 @@ void CreateCache(const char *folder, bool compress, bool skip)
 						TexHandle.Cleanup(tex);
 						free(fullpath);
 				}
-			}			
+			}
 		}
-    }
+	}
 	if (chdir("..") == -1)
 		printf("\nCan't access folder!\n");
-    closedir(dir);
+		
+	closedir(dir);
 }
 
 static void Usage(const char *exename, int error, const char *arg_error)
@@ -232,23 +233,23 @@ static void Usage(const char *exename, int error, const char *arg_error)
 
 	if(error == ARGV_UNKNOWN_OPTION)
 	{
-    	fprintf(stderr, "\nError!!! Unknown option : %s\n", arg_error);
+		fprintf(stderr, "\nError!!! Unknown option : %s\n", arg_error);
 	}
 	else if(error == ARGV_PATH_NOT_FOUND)
 	{
-    	fprintf(stderr, "\nError!!! Wrong path: %s\n", arg_error);
+		fprintf(stderr, "\nError!!! Wrong path: %s\n", arg_error);
 	}
 
-    fprintf(stderr, "\n");
+	fprintf(stderr, "\n");
 	fprintf(stderr, "Usage: %s Path [-OPTIONS]\n", exename);
-    fprintf(stderr, "\n");
-    fprintf(stderr, "#Path#\n");
-    fprintf(stderr, "  The path to the WiiFlow folder containing your boxcovers.\n");
-    fprintf(stderr, "\n");
-    fprintf(stderr, "#OPTIONS#\n");
-    fprintf(stderr, "  -uncompress : Don't compress textures. Not recommended, files are large. It's disabled by default in WiiFlow. \n");
-    fprintf(stderr, "  -wiicovers  : Create cache files for Wii and GameCube covers.\n");
-    fprintf(stderr, "\n");
+	fprintf(stderr, "\n");
+	fprintf(stderr, "#Path#\n");
+	fprintf(stderr, "  The path to the WiiFlow folder containing your boxcovers.\n");
+	fprintf(stderr, "\n");
+	fprintf(stderr, "#OPTIONS#\n");
+	fprintf(stderr, "  -uncompress : Don't compress textures. Not recommended, files are large. It's disabled by default in WiiFlow. \n");
+	fprintf(stderr, "  -wiicovers  : Create cache files for Wii and GameCube covers.\n");
+	fprintf(stderr, "\n");
 #ifdef WIN32
 	fprintf(stderr, "Examples:\n");
 	fprintf(stderr, "  %s e:\\WiiFlow\n", exename);
@@ -258,28 +259,28 @@ static void Usage(const char *exename, int error, const char *arg_error)
 	fprintf(stderr, "  %s /WiiFlow \n", exename);
 	fprintf(stderr, "  %s /WiiFlow -wiicovers\n", exename);
 #endif
-    fprintf(stderr, "\n");
+	fprintf(stderr, "\n");
 	exit(0);
 }
 
 static int HandleArguments(u32 argcount, char *argv[])
 {
-    u32  i;
+	u32  i;
 
 	if(argcount < 2)
 		Usage(argv[0], ARGV_OK, "");
  
-    for (i = 1; i < argcount; i++)
-    {
-        if (argv[i][0] == '-')
-        {
+	for (i = 1; i < argcount; i++)
+	{
+		if (argv[i][0] == '-')
+		{
 			if(i == 1)
 				Usage(argv[0], ARGV_OK, "");
 
-            char * option = argv[i];
+			char * option = argv[i];
 
-            if (strcmp(option, "-uncompress") == 0)
-            {
+			if (strcmp(option, "-uncompress") == 0)
+			{
 				printf("\ncompress  \n");
 				compressTex = false;
 			}
@@ -367,6 +368,6 @@ int main (int argc, char *argv[])
 	}
 	fclose(log);
 
-    return 0;
+	return 0;
 }
 
